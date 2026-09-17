@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HardwareHub — Hardware Marketplace</title>
+<style>
+:root{--ink:#152238;--muted:#6c7789;--line:#e8edf3;--bg:#f6f8fb;--card:#fff;--accent:#2563eb;--accent2:#14b8a6;--radius:18px}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+button,input,select{font:inherit}button{cursor:pointer;border:0}
+.topbar{background:#0e1a2b;color:#dce7f7;text-align:center;padding:10px;font-size:13px}
+header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+.nav{max-width:1240px;margin:auto;display:flex;align-items:center;gap:28px;padding:20px 22px}
+.logo{font-size:25px;font-weight:900;letter-spacing:-1px}.logo span{color:var(--accent)}
+.navlinks{display:flex;gap:20px;font-size:14px;font-weight:700}.navlinks a{color:var(--muted);text-decoration:none}.navlinks a:hover{color:var(--accent)}
+.search{flex:1;display:flex;background:#f1f5f9;border:1px solid #e4eaf2;border-radius:12px;padding:4px 8px}.search input{width:100%;border:0;outline:0;background:transparent;padding:10px;font-size:14px}.search button{background:var(--accent);color:#fff;border-radius:9px;padding:0 15px}
+.iconbtn{background:#f3f6fa;border-radius:12px;padding:11px 14px;position:relative}.badge{position:absolute;right:-5px;top:-6px;background:#ef4444;color:#fff;border-radius:20px;font-size:11px;padding:3px 6px}
+main{max-width:1240px;margin:auto;padding:30px 22px}.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;background:linear-gradient(125deg,#e8f0ff,#f4fffc);border:1px solid #dce8fa;border-radius:26px;padding:46px;overflow:hidden}
+.eyebrow{color:var(--accent);font-size:12px;font-weight:900;letter-spacing:1.8px;text-transform:uppercase}.hero h1{font-size:48px;line-height:1.04;letter-spacing:-2px;margin:14px 0}.hero p{color:var(--muted);max-width:520px;line-height:1.7}.primary{background:var(--accent);color:#fff;border-radius:12px;padding:13px 19px;font-weight:800}.secondary{background:#fff;color:var(--ink);border:1px solid #dce4ef;border-radius:12px;padding:12px 18px;font-weight:800;margin-left:8px}
+.hero-art{display:grid;place-items:center;position:relative}.device{width:240px;height:180px;border-radius:25px;background:linear-gradient(145deg,#172b49,#314c72);box-shadow:20px 25px 50px #b7c8df;transform:rotate(-8deg);padding:20px;color:white}.device .screen{height:90px;border-radius:12px;background:linear-gradient(135deg,#0b1728,#1d5b7d);display:grid;place-items:center;font-size:32px;font-weight:900;color:#75f2db}.device small{display:block;margin-top:15px;color:#b7c8df}
+.sectionhead{display:flex;justify-content:space-between;align-items:end;margin:42px 0 18px}.sectionhead h2{font-size:28px;margin:0;letter-spacing:-1px}.sectionhead p{color:var(--muted);margin:7px 0 0;font-size:14px}.filters{display:flex;gap:10px;flex-wrap:wrap}.filters button{padding:10px 15px;background:#fff;border:1px solid var(--line);border-radius:99px;font-size:13px;font-weight:700;color:var(--muted)}.filters button.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:.2s;position:relative}.card:hover{transform:translateY(-4px);box-shadow:0 12px 30px #15223812}.visual{height:180px;background:#eef3f8;display:grid;place-items:center;font-size:72px;position:relative}.tag{position:absolute;top:12px;left:12px;background:#dff8ee;color:#087f5b;padding:5px 9px;border-radius:7px;font-size:11px;font-weight:900}.heart{position:absolute;right:12px;top:12px;background:#fff;border-radius:50%;width:32px;height:32px}.info{padding:16px}.category{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:800}.name{font-weight:850;margin:8px 0;font-size:16px;min-height:38px}.rating{font-size:12px;color:#d28b00}.price{font-size:21px;font-weight:900;margin:12px 0}.price small{font-size:12px;color:#9aa5b5;text-decoration:line-through;margin-left:5px;font-weight:500}.add{width:100%;background:#eef4ff;color:var(--accent);padding:11px;border-radius:10px;font-weight:900}.add:hover{background:var(--accent);color:#fff}
+.trust{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:42px 0}.trust div{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px}.trust b{display:block;margin-bottom:7px}.trust span{font-size:13px;color:var(--muted)}
+footer{background:#0e1a2b;color:#c8d4e5;margin-top:50px;padding:38px 22px}.footerin{max-width:1240px;margin:auto;display:flex;justify-content:space-between;gap:30px}.footerin h3{color:#fff;margin-top:0}.footerin p{font-size:13px;line-height:1.7;max-width:350px}.footerlinks{display:flex;gap:30px;font-size:13px}.footerlinks a{color:#c8d4e5;text-decoration:none}
+.drawer{position:fixed;right:-420px;top:0;width:400px;max-width:95vw;height:100%;background:#fff;z-index:30;box-shadow:-20px 0 60px #0002;padding:25px;transition:.3s;overflow:auto}.drawer.open{right:0}.overlay{position:fixed;inset:0;background:#0e1a2b66;z-index:20;display:none}.overlay.show{display:block}.drawerhead{display:flex;justify-content:space-between;align-items:center}.cartitem{display:flex;gap:12px;border-bottom:1px solid var(--line);padding:16px 0}.cartemoji{font-size:35px;background:#eef3f8;padding:10px;border-radius:12px}.cartitem b{display:block}.cartitem small{color:var(--muted)}.qty{margin-top:8px;display:flex;gap:10px;align-items:center}.qty button{background:#eef3f8;border-radius:6px;padding:3px 9px}.total{display:flex;justify-content:space-between;font-size:20px;font-weight:900;margin:25px 0}
+@media(max-width:950px){.grid{grid-template-columns:repeat(3,1fr)}.hero{grid-template-columns:1fr}.hero-art{display:none}.navlinks{display:none}}
+@media(max-width:650px){.grid{grid-template-columns:repeat(2,1fr)}.nav{gap:10px;padding:15px}.logo{font-size:20px}.hero{padding:28px}.hero h1{font-size:36px}.trust{grid-template-columns:repeat(2,1fr)}.footerin{flex-direction:column}.footerlinks{flex-wrap:wrap}.sectionhead{align-items:start;gap:15px;flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="topbar">Free delivery on orders over ₹2,000 · Built for makers, engineers & innovators</div>
+<header><div class="nav">
+<div class="logo">Hardware<span>Hub</span></div>
+<nav class="navlinks"><a href="#shop">Shop</a><a href="#categories">Categories</a><a href="#deals">Deals</a></nav>
+<div class="search"><input id="search" placeholder="Search sensors, boards, modules..." /><button onclick="render()">Search</button></div>
+<button class="iconbtn" onclick="openCart()">🛒<span class="badge" id="count">0</span></button>
+</div></header>
+<main>
+<section class="hero">
+<div><div class="eyebrow">The maker's marketplace</div><h1>Build smarter.<br><span style="color:var(--accent)">Ship faster.</span></h1><p>Discover carefully selected electronics, embedded boards, sensors and prototyping essentials for your next breakthrough hardware project.</p><button class="primary" onclick="document.querySelector('#shop').scrollIntoView({behavior:'smooth'})">Explore hardware →</button><button class="secondary" onclick="filterCategory('Boards')">Shop boards</button></div>
+<div class="hero-art"><div class="device"><div class="screen">HUB</div><small>Prototype-ready hardware</small></div></div>
+</section>
+<section id="categories"><div class="sectionhead"><div><h2>Shop by category</h2><p>Everything you need in one place.</p></div></div><div class="filters" id="filters"></div></section>
+<section id="shop"><div class="sectionhead"><div><h2>Featured hardware</h2><p id="resultText">Curated components for your next build.</p></div><select id="sort" onchange="render()" style="padding:10px;border:1px solid var(--line);border-radius:10px"><option value="featured">Featured</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option></select></div><div class="grid" id="products"></div></section>
+<div class="trust"><div><b>✓ Quality checked</b><span>Reliable parts from trusted suppliers.</span></div><div><b>⚡ Fast dispatch</b><span>Quick shipping across India.</span></div><div><b>🧩 Maker friendly</b><span>Specs that are easy to understand.</span></div><div><b>🔒 Secure checkout</b><span>Your order details stay protected.</span></div></div>
+</main>
+<footer><div class="footerin"><div><h3>HardwareHub</h3><p>A modern marketplace concept for developers, students, makers and hardware teams. Demo checkout only — no real payments are processed.</p></div><div class="footerlinks"><a href="#shop">Products</a><a href="#categories">Categories</a><a href="#">Support</a><a href="#">About</a></div></div></footer>
+<div class="overlay" id="overlay" onclick="closeCart()"></div><aside class="drawer" id="drawer"><div class="drawerhead"><h2>Your cart</h2><button onclick="closeCart()">✕</button></div><div id="cartItems"></div><div class="total"><span>Total</span><span id="total">₹0</span></div><button class="primary" style="width:100%" onclick="checkout()">Proceed to checkout</button></aside>
+<script>
+const products=[
+{id:1,name:'Raspberry Pi 5 4GB',cat:'Boards',price:13999,old:15999,emoji:'🖥️',tag:'Popular',rating:'★★★★★ 4.9'},
+{id:2,name:'ESP32 Development Board',cat:'Boards',price:499,old:699,emoji:'🔌',tag:'Bestseller',rating:'★★★★★ 4.8'},
+{id:3,name:'VL53L4CD ToF Distance Sensor',cat:'Sensors',price:1299,old:1599,emoji:'📡',tag:'New',rating:'★★★★★ 4.7'},
+{id:4,name:'BME280 Environment Sensor',cat:'Sensors',price:349,old:499,emoji:'🌡️',tag:'Value pick',rating:'★★★★☆ 4.6'},
+{id:5,name:'12V DC Water Pump',cat:'Actuators',price:899,old:1099,emoji:'💧',tag:'Popular',rating:'★★★★★ 4.8'},
+{id:6,name:'4-Channel Relay Module',cat:'Modules',price:279,old:399,emoji:'⚙️',tag:'Bestseller',rating:'★★★★☆ 4.5'},
+{id:7,name:'Raspberry Pi Camera Module',cat:'Cameras',price:3250,old:3799,emoji:'📷',tag:'New',rating:'★★★★★ 4.7'},
+{id:8,name:'Capacitive Soil Moisture Sensor',cat:'Sensors',price:399,old:599,emoji:'🌱',tag:'Value pick',rating:'★★★★☆ 4.5'},
+{id:9,name:'Jumper Wire & Breadboard Kit',cat:'Prototyping',price:599,old:799,emoji:'🧰',tag:'Starter kit',rating:'★★★★★ 4.8'},
+{id:10,name:'12V MOSFET Driver Module',cat:'Modules',price:249,old:349,emoji:'🔧',tag:'Popular',rating:'★★★★☆ 4.4'},
+{id:11,name:'Mini Peristaltic Pump',cat:'Actuators',price:799,old:999,emoji:'🫧',tag:'New',rating:'★★★★☆ 4.6'},
+{id:12,name:'USB-C Power Supply 27W',cat:'Power',price:899,old:1199,emoji:'🔋',tag:'Bestseller',rating:'★★★★★ 4.8'}
+];
+let active='All',cart={};
+const money=n=>'₹'+n.toLocaleString('en-IN');
+function filterCategory(c){active=c;renderFilters();render()}
+function renderFilters(){let cats=['All',...new Set(products.map(p=>p.cat))];document.getElementById('filters').innerHTML=cats.map(c=>`<button class="${active===c?'active':''}" onclick="filterCategory('${c}')">${c}</button>`).join('')}
+function render(){let q=document.getElementById('search').value.toLowerCase();let list=products.filter(p=>(active==='All'||p.cat===active)&&(p.name+' '+p.cat).toLowerCase().includes(q));let sort=document.getElementById('sort').value;if(sort==='low')list.sort((a,b)=>a.price-b.price);if(sort==='high')list.sort((a,b)=>b.price-a.price);document.getElementById('resultText').textContent=`Showing ${list.length} hardware products`;document.getElementById('products').innerHTML=list.map(p=>`<article class="card"><div class="visual"><span class="tag">${p.tag}</span><button class="heart" onclick="this.textContent=this.textContent==='♡'?'♥':'♡'">♡</button>${p.emoji}</div><div class="info"><div class="category">${p.cat}</div><div class="name">${p.name}</div><div class="rating">${p.rating}</div><div class="price">${money(p.price)} <small>${money(p.old)}</small></div><button class="add" onclick="add(${p.id})">Add to cart +</button></div></article>`).join('')||'<p>No products found. Try another search.</p>'}
+function add(id){cart[id]=(cart[id]||0)+1;updateCart();openCart()}
+function updateCart(){let ids=Object.keys(cart);document.getElementById('count').textContent=ids.reduce((s,id)=>s+cart[id],0);document.getElementById('cartItems').innerHTML=ids.length?ids.map(id=>{let p=products.find(x=>x.id==id);return `<div class="cartitem"><div class="cartemoji">${p.emoji}</div><div style="flex:1"><b>${p.name}</b><small>${money(p.price)}</small><div class="qty"><button onclick="change(${id},-1)">−</button>${cart[id]}<button onclick="change(${id},1)">+</button><button onclick="removeItem(${id})" style="margin-left:auto">🗑</button></div></div></div>`}).join(''):'<p style="color:var(--muted)">Your cart is empty.</p>';document.getElementById('total').textContent=money(ids.reduce((s,id)=>s+products.find(p=>p.id==id).price*cart[id],0))}
+function change(id,n){cart[id]+=n;if(cart[id]<=0)delete cart[id];updateCart()}function removeItem(id){delete cart[id];updateCart()}function openCart(){document.getElementById('drawer').classList.add('open');document.getElementById('overlay').classList.add('show')}function closeCart(){document.getElementById('drawer').classList.remove('open');document.getElementById('overlay').classList.remove('show')}function checkout(){if(!Object.keys(cart).length)return alert('Your cart is empty.');alert('Demo checkout: your hardware order has been prepared. No payment was processed.')}
+renderFilters();render();updateCart();
+</script>
+</body>
+</html>
